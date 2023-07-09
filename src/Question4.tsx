@@ -3,7 +3,6 @@
 import * as React from "react"
 import './Styles.css';
 import axios from "axios"
-import { useRef } from "react";
 // https://www.npmjs.com/package/axios
 // npm install axios
 
@@ -40,15 +39,13 @@ const getFullUserName = (userInfo: UserInfo) => {
   return `${first} ${last}`
 }
 
-export default function Bonus() {
+export default function Question4() {
   const [counter, setCounter] = useState(0)
   const [nextPageNumber, setNextPageNumber] = useState(1)
   const [userInfos, setUserInfos] = useState<Array<UserInfo>>([])
   const [randomUserDataJSON, setRandomUserDataJSON] = useState('')
 
-  const fetchNextUser = useRef(() => { })
-
-  fetchNextUser.current = () => {
+  const fetchNextUser = () => {
     fetchRandomData(nextPageNumber).then((randomData) => {
       // setRandomUserDataJSON(JSON.stringify(randomData, null, 2) || 'No user data found')
       if (randomData === undefined) return
@@ -62,12 +59,9 @@ export default function Bonus() {
   }
 
   useEffect(() => {
-    fetchNextUser.current()
+    // fetchNextUser()
+    fetchNextUser()
   }, [])
-
-  // useEffect(() => {
-  //   fetchNextUser()
-  // }, [fetchNextUser, counter])
 
   return (
     <div className="App">
@@ -86,7 +80,7 @@ export default function Bonus() {
       </button>
       <button
         onClick={() => {
-          fetchNextUser.current()
+          fetchNextUser()
         }}
       >
         Fetch Next User

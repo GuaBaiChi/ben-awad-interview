@@ -3,7 +3,6 @@
 import * as React from "react"
 import './Styles.css';
 import axios from "axios"
-import { useRef } from "react";
 // https://www.npmjs.com/package/axios
 // npm install axios
 
@@ -26,10 +25,12 @@ interface UserInfo {
   picture: UserPicture
 }
 
-const fetchRandomData = (pageNumber: number) => {
-  return axios
-    .get(`https://randomuser.me/api?page=${pageNumber}`)
-    .then(({ data }) => data)
+const fetchRandomData = () => {
+  return axios.get('https://randomuser.me/api')
+    .then(({ data }) => {
+      console.log(data)
+      return data
+    })
     .catch(err => {
       console.error(err)
     })
@@ -40,34 +41,17 @@ const getFullUserName = (userInfo: UserInfo) => {
   return `${first} ${last}`
 }
 
-export default function Bonus() {
+export default function Question3() {
   const [counter, setCounter] = useState(0)
-  const [nextPageNumber, setNextPageNumber] = useState(1)
-  const [userInfos, setUserInfos] = useState<Array<UserInfo>>([])
+  const [userInfos, setUserInfos] = useState([])
   const [randomUserDataJSON, setRandomUserDataJSON] = useState('')
 
-  const fetchNextUser = useRef(() => { })
-
-  fetchNextUser.current = () => {
-    fetchRandomData(nextPageNumber).then((randomData) => {
-      // setRandomUserDataJSON(JSON.stringify(randomData, null, 2) || 'No user data found')
-      if (randomData === undefined) return
-      const newUserInfos = [
-        ...userInfos,
-        ...randomData.results
-      ]
-      setUserInfos(newUserInfos)
-      setNextPageNumber(randomData.info.page + 1)
-    })
-  }
-
   useEffect(() => {
-    fetchNextUser.current()
+    fetchRandomData().then((randomData) => {
+      setRandomUserDataJSON(JSON.stringify(randomData, null, 2) || 'No user data found')
+      setUserInfos(randomData.results)
+    })
   }, [])
-
-  // useEffect(() => {
-  //   fetchNextUser()
-  // }, [fetchNextUser, counter])
 
   return (
     <div className="App">
@@ -76,20 +60,12 @@ export default function Bonus() {
       <p>
         {counter}
       </p>
-      <button
-        onClick={() => {
-          setCounter(counter + 1)
-          console.log('foo')
-        }}
+      <button onClick={() => {
+        setCounter(counter + 1)
+        console.log('foo')
+      }}
       >
         Increase Counter
-      </button>
-      <button
-        onClick={() => {
-          fetchNextUser.current()
-        }}
-      >
-        Fetch Next User
       </button>
       {
         userInfos.map((userInfo: UserInfo, idx: number) => (
