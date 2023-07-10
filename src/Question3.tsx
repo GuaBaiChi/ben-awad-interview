@@ -1,4 +1,5 @@
 // https://www.youtube.com/watch?v=gnkrDse9QKc
+// Question 4, Display the API data in UI components
 
 import * as React from "react"
 import './Styles.css';
@@ -43,7 +44,7 @@ const getFullUserName = (userInfo: UserInfo) => {
 
 export default function Question3() {
   const [counter, setCounter] = useState(0)
-  const [userInfos, setUserInfos] = useState([])
+  const [userInfos, setUserInfos] = useState<Array<UserInfo>>([])
   const [randomUserDataJSON, setRandomUserDataJSON] = useState('')
 
   useEffect(() => {

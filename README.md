@@ -5,7 +5,7 @@ https://create-react-app.dev/docs/adding-typescript/
 ```bash
 npx create-react-app my-app --template typescript
 ```
-replace `my-app` with app name
+replace `my-app` with app name or working directory folder.
 
 # Youtube link to the interview
 

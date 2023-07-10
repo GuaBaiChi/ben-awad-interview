@@ -1,4 +1,5 @@
 // https://www.youtube.com/watch?v=gnkrDse9QKc
+// Bonus, fix the linter's useEffect dependency array requirement
 
 import * as React from "react"
 import './Styles.css';

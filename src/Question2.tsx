@@ -1,4 +1,5 @@
 // https://www.youtube.com/watch?v=gnkrDse9QKc
+// Question 2, fetch an API
 
 import * as React from "react"
 import './Styles.css';
