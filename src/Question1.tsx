@@ -1,25 +1,32 @@
 // https://www.youtube.com/watch?v=gnkrDse9QKc
 // Question 1, make a counter
 
-import * as React from "react"
-// import React from 'react';
+import React from 'react';
 import './Styles.css';
 
-const { useState } = React
-
 export default function Question1() {
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = React.useState(0)
+
+  function counterHandler() {
+    setCounter(counter + 1)
+  }
+
+  // extra3z
+  const handleCounterClick2 = () => {
+    setCounter(counter + 1);
+  };
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-      <p>
-        {counter}
-      </p>
-      <button onClick={() =>
-        setCounter(counter + 1)
-      }>Increase Counter</button>
+      {/* My own */}
+      <button onClick={counterHandler}>Counter clicker</button>
+      <p>{counter}</p>
+      {/* From the video */}
+      <button onClick={() => { setCounter(counter + 1) }}>Counter clicker</button>
+
+      {/* extra */}
+      <button onClick={handleCounterClick2}>Counter clicker</button>
+
     </div>
   )
 }

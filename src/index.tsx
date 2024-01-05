@@ -22,9 +22,9 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     <Question1 />
-    <Question2 />
+    {/* <Question2 />
     <Question3 />
-    <Question4 />
-    <Bonus />
+    <Question4 /> */}
+    {/* <Bonus /> */}
   </React.StrictMode>
 );
